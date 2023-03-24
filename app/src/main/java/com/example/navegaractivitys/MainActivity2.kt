@@ -1,5 +1,6 @@
 package com.example.navegaractivitys
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -17,7 +18,17 @@ class MainActivity2 : AppCompatActivity() {
 
         //se asigna la informacion al text view
         if(miBundle != null){
-            campoMensaje.text = "Hla ${miBundle.getString("Nombre") } bienvenido \n Sus notas son:\n ${miBundle.getDouble("nota1") } \n ${miBundle.getDouble("nota2") } \n ${miBundle.getDouble("nota3") } \n Su promedio es: ${miBundle.getDouble("promedio") }"
+            if(miBundle.getDouble("promedio") >= 3.5){
+                campoMensaje.setTextColor(Color.GREEN)
+                campoMensaje.text = "Hla ${miBundle.getString("Nombre") } bienvenido \n Sus notas son:\n ${miBundle.getDouble("nota1") } \n ${miBundle.getDouble("nota2") } \n ${miBundle.getDouble("nota3") } \n Su promedio es: ${miBundle.getDouble("promedio")} \n ${miBundle.getString("Mensaje")}"
+            }else if (miBundle.getDouble("promedio") < 3.5){
+                campoMensaje.setTextColor(Color.RED)
+                campoMensaje.text = "Hla ${miBundle.getString("Nombre") } bienvenido \n Sus notas son:\n ${miBundle.getDouble("nota1") } \n ${miBundle.getDouble("nota2") } \n ${miBundle.getDouble("nota3") } \n Su promedio es: ${miBundle.getDouble("promedio")} \n ${miBundle.getString("Mensaje")}"
+
+            }else{
+
+            }
+
         }
 
         var btnSalir = findViewById<Button>(R.id.btnsalir)

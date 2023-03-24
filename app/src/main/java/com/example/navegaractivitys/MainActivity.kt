@@ -1,6 +1,7 @@
 package com.example.navegaractivitys
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -41,16 +42,23 @@ class MainActivity : AppCompatActivity() {
     private fun mostrar(but: Int) {
 
 
-
         when (but) {
             1 -> {
                 var nombre: String = nombre!!.text.toString()
                 var materia: String = materia!!.text.toString()
-                var nota1:Double= nota1!!.text.toString().toDouble()
-                var nota2:Double= nota2!!.text.toString().toDouble()
-                var nota3:Double= nota3!!.text.toString().toDouble()
-                var promedio:Double = nota1+nota2+nota3/3
-                txtResultado!!.text = "Bienvenido $nombre\n $materia\n $nota1\n $nota2\n $nota3\n Su promedio es: ${promedio}"
+                var nota1: Double = nota1!!.text.toString().toDouble()
+                var nota2: Double = nota2!!.text.toString().toDouble()
+                var nota3: Double = nota3!!.text.toString().toDouble()
+                var promedio: Double = (nota1 + nota2 + nota3) / 3
+                var mensaje: String = ""
+                if (promedio >= 3.5) {
+                    txtResultado?.setTextColor(Color.GREEN)
+                    mensaje = "Pasaste la materia"
+                } else if (promedio < 3.5) {
+                    txtResultado?.setTextColor(Color.RED)
+                    mensaje = "No pasaste la materia"
+                }
+                txtResultado!!.text = "Bienvenido $nombre\n $materia\n $nota1\n $nota2\n $nota3\n Su promedio es: ${promedio}\n ${mensaje}"
 
                 //Toast.makeText(this, "$nombre\n", Toast.LENGTH_SHORT).show()
             }
@@ -61,17 +69,23 @@ class MainActivity : AppCompatActivity() {
                 val mibundle: Bundle = Bundle()
                 var nombre: String = nombre!!.text.toString()
                 var materia: String = materia!!.text.toString()
-                var nota1:Double= nota1!!.text.toString().toDouble()
-                var nota2:Double= nota2!!.text.toString().toDouble()
-                var nota3:Double= nota3!!.text.toString().toDouble()
-                var promedio:Double = nota1+nota2+nota3/3
-                mibundle.putString("Nombre",nombre)
-                mibundle.putString("Materia",materia)
-                mibundle.putDouble("nota1",nota1)
-                mibundle.putDouble("nota2",nota2)
-                mibundle.putDouble("nota3",nota3)
-                mibundle.putDouble("promedio",promedio)
-
+                var nota1: Double = nota1!!.text.toString().toDouble()
+                var nota2: Double = nota2!!.text.toString().toDouble()
+                var nota3: Double = nota3!!.text.toString().toDouble()
+                var promedio: Double =  (nota1 + nota2 + nota3) / 3
+                var mensaje: String = ""
+                if (promedio >= 3.5) {
+                    mensaje = "Pasaste la materia"
+                } else if (promedio < 3.5) {
+                    mensaje = "No pasaste la materia"
+                }
+                mibundle.putString("Nombre", nombre)
+                mibundle.putString("Materia", materia)
+                mibundle.putDouble("nota1", nota1)
+                mibundle.putDouble("nota2", nota2)
+                mibundle.putDouble("nota3", nota3)
+                mibundle.putDouble("promedio", promedio)
+                mibundle.putString("Mensaje", mensaje)
 
 
                 //le agragamos la informacion al intent para que sea emviada
